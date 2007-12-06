@@ -44,8 +44,26 @@ rm -f %{buildroot}/opt/tuxdroid/apps/tuxgi/sounds/9.wav
 #- or else some race will prevent tuxd from accessing the device
 mv %{buildroot}%{_sysconfdir}/udev/rules.d/{45,55}-tuxdroid.rules
 
+cat > %{buildroot}%{_datadir}/applications/tuxgi.desktop << EOF
+[Desktop Entry]
+Name=Tux Droid Interface
+Comment=Tux Droid graphical interface
+Exec=tuxgi
+Icon=tuxmanager
+Terminal=false
+Type=Application
+Categories=Utility;
+StartupNotify=true
+EOF
+
 %clean
 rm -rf %{buildroot}
+
+%post
+%update_menus
+
+%postun
+%clean_menus
 
 %files
 %defattr(-,root,root)
