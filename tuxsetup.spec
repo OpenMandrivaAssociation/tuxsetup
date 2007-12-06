@@ -15,6 +15,7 @@ Group: Toys
 Url: http://www.tuxisalive.com/developer-corner/software/tuxsetup/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 ExclusiveArch: %{ix86}
+Requires: dynamic
 
 %description
 tuxsetup contains daemons and applications for the Tux Droid wireless robot:
@@ -56,6 +57,27 @@ Categories=Utility;
 StartupNotify=true
 EOF
 
+install -d %{buildroot}%{_sysconfdir}/dynamic/launchers/tuxdroid
+for desktop in kde gnome; do
+  ln -sf ../../../../%{_datadir}/applications/tuxgi.desktop \
+    %{buildroot}%{_sysconfdir}/dynamic/launchers/tuxdroid/$desktop.desktop
+done
+
+install -d %{buildroot}%{_sysconfdir}/dynamic/scripts
+cat > %{buildroot}%{_sysconfdir}/dynamic/scripts/tuxdroid.script << EOF
+#!/bin/sh
+. /etc/dynamic/scripts/functions.script
+check_activated \$0
+call_hooks \$ACTION tuxdroid \$DEVNAME ""
+EOF
+chmod +x %{buildroot}%{_sysconfdir}/dynamic/scripts/tuxdroid.script
+
+cat > %{buildroot}%{_sysconfdir}/udev/rules.d/65-tuxdroid-dynamic.rules << EOF
+# Dynamic rules for tuxdroid
+SUBSYSTEM=="usb_device", SYSFS{idVendor}=="03eb", SYSFS{idProduct}=="ff07", ENV{TUXDROID}="1"
+ENV{TUXDROID}=="1", RUN+="/bin/sh -c '/etc/dynamic/scripts/tuxdroid.script &'"
+EOF
+
 %clean
 rm -rf %{buildroot}
 
@@ -69,7 +91,9 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %doc ACAPELALICENSE CHANGES README
 %{_bindir}/tux*
-%{_sysconfdir}/udev/rules.d/*-tuxdroid.rules
+%{_sysconfdir}/udev/rules.d/*-tuxdroid*.rules
+%{_sysconfdir}/dynamic/scripts/tuxdroid.script
+%{_sysconfdir}/dynamic/launchers/tuxdroid
 %{_datadir}/applications/tux*.desktop
 %{_datadir}/mime/tuxgadgetframework.xml
 %{_datadir}/pixmaps/tux*.png
