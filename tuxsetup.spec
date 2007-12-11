@@ -1,6 +1,6 @@
 %define name tuxsetup
 %define version 1.1.0010
-%define release %mkrel 1
+%define release %mkrel 2
 %define distname %{name}-%{version}-final
 
 %define _requires_exceptions libbabtts.so
@@ -10,12 +10,16 @@ Name: %{name}
 Version: %{version}
 Release: %{release}
 Source0: %{distname}.tar.gz
+# use root supplementary group to be able to access USB devices
+# when running tuxd from udev
+Patch0: tuxsetup-1.1.0010-final-suppl_group.patch
 License: GPL/Acapela
 Group: Toys
 Url: http://www.tuxisalive.com/developer-corner/software/tuxsetup/
 BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 ExclusiveArch: %{ix86}
 Requires: dynamic
+Requires: python-pyxml
 
 %description
 tuxsetup contains daemons and applications for the Tux Droid wireless robot:
@@ -30,6 +34,7 @@ tuxsetup contains daemons and applications for the Tux Droid wireless robot:
 
 %prep
 %setup -q -n %{distname}
+%patch0 -p1
 
 %build
 
