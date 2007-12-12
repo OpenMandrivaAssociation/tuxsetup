@@ -1,6 +1,6 @@
 %define name tuxsetup
 %define version 1.1.0010
-%define release %mkrel 2
+%define release %mkrel 3
 %define distname %{name}-%{version}-final
 
 %define _requires_exceptions libbabtts.so
@@ -20,6 +20,7 @@ BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 ExclusiveArch: %{ix86}
 Requires: dynamic
 Requires: python-pyxml
+Requires: pygtk2.0-libglade
 
 %description
 tuxsetup contains daemons and applications for the Tux Droid wireless robot:
