@@ -16,7 +16,6 @@ Patch0: tuxsetup-1.1.0010-final-suppl_group.patch
 License: GPL/Acapela
 Group: Toys
 Url: http://www.tuxisalive.com/developer-corner/software/tuxsetup/
-BuildRoot: %{_tmppath}/%{name}-%{version}-%{release}-buildroot
 ExclusiveArch: %{ix86}
 Requires: dynamic
 Requires: python-pyxml
