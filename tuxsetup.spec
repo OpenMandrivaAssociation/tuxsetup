@@ -102,6 +102,11 @@ SUBSYSTEM=="usb_device", SYSFS{idVendor}=="03eb", SYSFS{idProduct}=="ff07", ENV{
 ENV{TUXDROID}=="1", RUN+="/bin/sh -c '/etc/dynamic/scripts/tuxdroid.script &>/dev/null &'"
 EOF
 
+#- do not modify firmware files by converting EOL
+export DONT_FIX_EOL=1
+# does not work because fix-eol matches on basename, not full path
+# export EXCLUDE_FROM_EOL_CONVERSION=`find %{buildroot}/opt/tuxdroid/firmware/ -type f`
+
 %clean
 rm -rf %{buildroot}
 
