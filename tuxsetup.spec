@@ -1,6 +1,6 @@
 %define name tuxsetup
 %define version 1.1.0010
-%define release %mkrel 4
+%define release %mkrel 5
 %define distname %{name}-%{version}-final
 
 %define _requires_exceptions libbabtts.so
@@ -54,7 +54,7 @@ rm -f %{buildroot}/opt/tuxdroid/apps/tuxgi/sounds/9.wav
 mv %{buildroot}%{_sysconfdir}/udev/rules.d/{45,55}-tuxdroid.rules
 
 #- fix shebangs
-sed -ie 's,^#/bin/,#!/bin/,' %{buildroot}/opt/tuxdroid/bin/tux*
+sed -i 's,^#/bin/,#!/bin/,' %{buildroot}/opt/tuxdroid/bin/tux*
 
 #- consolehelper config: do not ask for password
 mkdir -p %{buildroot}%{_sbindir}
