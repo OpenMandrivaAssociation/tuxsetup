@@ -53,6 +53,19 @@ rm -f %{buildroot}/opt/tuxdroid/apps/tuxgi/sounds/9.wav
 #- or else some race will prevent tuxd from accessing the device
 mv %{buildroot}%{_sysconfdir}/udev/rules.d/{45,55}-tuxdroid.rules
 
+#- consolehelper config: do not ask for password
+mkdir -p %{buildroot}%{_sbindir}
+mv %{buildroot}%{_bindir}/tuxgdg %{buildroot}%{_sbindir}/tuxgdg
+ln -s %{_bindir}/consolehelper %{buildroot}%{_bindir}/tuxgdg
+mkdir -p %{buildroot}%{_sysconfdir}/pam.d/
+ln -sf %{_sysconfdir}/pam.d/mandriva-console-auth %{buildroot}%{_sysconfdir}/pam.d/tuxgdg
+mkdir -p %{buildroot}%{_sysconfdir}/security/console.apps/
+cat > %{buildroot}%{_sysconfdir}/security/console.apps/tuxgdg <<EOF
+PROGRAM=/usr/sbin/tuxgdg
+FALLBACK=false
+SESSION=true
+EOF
+
 cat > %{buildroot}%{_datadir}/applications/tuxgi.desktop << EOF
 [Desktop Entry]
 Name=Tux Droid Interface
@@ -100,6 +113,9 @@ rm -rf %{buildroot}
 %doc ACAPELALICENSE CHANGES README
 %{_bindir}/dfu-programmer
 %{_bindir}/tux*
+%{_sbindir}/tuxgdg
+%{_sysconfdir}/pam.d/tuxgdg
+%{_sysconfdir}/security/console.apps/tuxgdg
 %{_sysconfdir}/udev/rules.d/*-tuxdroid*.rules
 %{_sysconfdir}/dynamic/scripts/tuxdroid.script
 %{_sysconfdir}/dynamic/launchers/tuxdroid
