@@ -42,6 +42,9 @@ tuxsetup contains daemons and applications for the Tux Droid wireless robot:
 rm -rf %{buildroot}
 cp -a mirror %{buildroot}
 mv %{buildroot}/usr/local/bin %{buildroot}%{_bindir}
+#- add link for dfu-programmer (see scripts/postinst)
+ln -nsf /opt/tuxdroid/bin/dfu-programmer %{buildroot}%{_bindir}/dfu-programmer
+
 rm -f %{buildroot}%{_docdir}/%{name}/COPYING 
 #- copyrighted file
 rm -f %{buildroot}/opt/tuxdroid/apps/tuxgi/sounds/9.wav
@@ -95,6 +98,7 @@ rm -rf %{buildroot}
 %files
 %defattr(-,root,root)
 %doc ACAPELALICENSE CHANGES README
+%{_bindir}/dfu-programmer
 %{_bindir}/tux*
 %{_sysconfdir}/udev/rules.d/*-tuxdroid*.rules
 %{_sysconfdir}/dynamic/scripts/tuxdroid.script
