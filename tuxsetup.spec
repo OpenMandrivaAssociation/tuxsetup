@@ -1,6 +1,6 @@
 %define name tuxsetup
 %define version 1.1.0010
-%define release %mkrel 3
+%define release %mkrel 4
 %define distname %{name}-%{version}-final
 
 %define _requires_exceptions libbabtts.so
@@ -99,7 +99,7 @@ chmod +x %{buildroot}%{_sysconfdir}/dynamic/scripts/tuxdroid.script
 cat > %{buildroot}%{_sysconfdir}/udev/rules.d/65-tuxdroid-dynamic.rules << EOF
 # Dynamic rules for tuxdroid
 SUBSYSTEM=="usb_device", SYSFS{idVendor}=="03eb", SYSFS{idProduct}=="ff07", ENV{TUXDROID}="1"
-ENV{TUXDROID}=="1", RUN+="/bin/sh -c '/etc/dynamic/scripts/tuxdroid.script &'"
+ENV{TUXDROID}=="1", RUN+="/bin/sh -c '/etc/dynamic/scripts/tuxdroid.script &>/dev/null &'"
 EOF
 
 %clean
