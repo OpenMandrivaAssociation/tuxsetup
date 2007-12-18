@@ -53,6 +53,9 @@ rm -f %{buildroot}/opt/tuxdroid/apps/tuxgi/sounds/9.wav
 #- or else some race will prevent tuxd from accessing the device
 mv %{buildroot}%{_sysconfdir}/udev/rules.d/{45,55}-tuxdroid.rules
 
+#- fix shebangs
+sed -ie 's,^#/bin/,#!/bin/,' %{buildroot}/opt/tuxdroid/bin/tux*
+
 #- consolehelper config: do not ask for password
 mkdir -p %{buildroot}%{_sbindir}
 mv %{buildroot}%{_bindir}/tuxgdg %{buildroot}%{_sbindir}/tuxgdg
