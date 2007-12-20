@@ -38,6 +38,7 @@ tuxsetup contains daemons and applications for the Tux Droid wireless robot:
 %patch0 -p1
 %patch1 -p1
 chmod +x mirror/opt/tuxdroid/bin/tuxgdgmaker
+ln -sf /opt/tuxdroid/bin/tuxgdgmaker mirror/usr/local/bin/tuxgdgmaker
 
 %build
 
