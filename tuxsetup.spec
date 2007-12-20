@@ -62,17 +62,19 @@ mv %{buildroot}%{_sysconfdir}/udev/rules.d/{45,55}-tuxdroid.rules
 sed -i 's,^#/bin/,#!/bin/,' %{buildroot}/opt/tuxdroid/bin/tux*
 
 #- consolehelper config: do not ask for password
-mkdir -p %{buildroot}%{_sbindir}
-mv %{buildroot}%{_bindir}/tuxgdg %{buildroot}%{_sbindir}/tuxgdg
-ln -s %{_bindir}/consolehelper %{buildroot}%{_bindir}/tuxgdg
-mkdir -p %{buildroot}%{_sysconfdir}/pam.d/
-ln -sf %{_sysconfdir}/pam.d/mandriva-console-auth %{buildroot}%{_sysconfdir}/pam.d/tuxgdg
-mkdir -p %{buildroot}%{_sysconfdir}/security/console.apps/
-cat > %{buildroot}%{_sysconfdir}/security/console.apps/tuxgdg <<EOF
-PROGRAM=/usr/sbin/tuxgdg
+for program in tuxgdg tuxgdgmaker; do
+    mkdir -p %{buildroot}%{_sbindir}
+    mv %{buildroot}%{_bindir}/$program %{buildroot}%{_sbindir}/$program
+    ln -s %{_bindir}/consolehelper %{buildroot}%{_bindir}/$program
+    mkdir -p %{buildroot}%{_sysconfdir}/pam.d/
+    ln -sf %{_sysconfdir}/pam.d/mandriva-console-auth %{buildroot}%{_sysconfdir}/pam.d/$program
+    mkdir -p %{buildroot}%{_sysconfdir}/security/console.apps/
+    cat > %{buildroot}%{_sysconfdir}/security/console.apps/$program <<EOF
+PROGRAM=/usr/sbin/$program
 FALLBACK=false
 SESSION=true
 EOF
+done
 
 cat > %{buildroot}%{_datadir}/applications/tuxgi.desktop << EOF
 [Desktop Entry]
@@ -126,9 +128,9 @@ rm -rf %{buildroot}
 %doc ACAPELALICENSE CHANGES README
 %{_bindir}/dfu-programmer
 %{_bindir}/tux*
-%{_sbindir}/tuxgdg
-%{_sysconfdir}/pam.d/tuxgdg
-%{_sysconfdir}/security/console.apps/tuxgdg
+%{_sbindir}/tux*
+%{_sysconfdir}/pam.d/tux*
+%{_sysconfdir}/security/console.apps/tux*
 %{_sysconfdir}/udev/rules.d/*-tuxdroid*.rules
 %{_sysconfdir}/dynamic/scripts/tuxdroid.script
 %{_sysconfdir}/dynamic/launchers/tuxdroid
