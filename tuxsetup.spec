@@ -1,6 +1,6 @@
 %define name tuxsetup
-%define version 1.1.0010
-%define release %mkrel 5
+%define version 1.2.0037
+%define release %mkrel 1
 %define distname %{name}-%{version}-final
 
 %define _requires_exceptions libbabtts.so
@@ -129,6 +129,6 @@ rm -rf %{buildroot}
 %{_sysconfdir}/dynamic/launchers/tuxdroid
 %{_datadir}/applications/tux*.desktop
 %{_datadir}/mime/tuxgadgetframework.xml
-%{_datadir}/pixmaps/tux*.png
+%{_datadir}/pixmaps/*.png
 /opt/Acapela
 /opt/tuxdroid
