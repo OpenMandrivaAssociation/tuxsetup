@@ -13,6 +13,7 @@ Source0: %{distname}.tar.gz
 # use root supplementary group to be able to access USB devices
 # when running tuxd from udev
 Patch0: tuxsetup-1.1.0010-final-suppl_group.patch
+Patch1: tuxsetup-1.2.0037-final-use_helper.patch
 License: GPL/Acapela
 Group: Toys
 Url: http://www.tuxisalive.com/developer-corner/software/tuxsetup/
@@ -35,6 +36,8 @@ tuxsetup contains daemons and applications for the Tux Droid wireless robot:
 %prep
 %setup -q -n %{distname}
 %patch0 -p1
+%patch1 -p1
+chmod +x mirror/opt/tuxdroid/bin/tuxgdgmaker
 
 %build
 
