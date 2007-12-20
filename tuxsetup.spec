@@ -44,6 +44,8 @@ cp -a mirror %{buildroot}
 mv %{buildroot}/usr/local/bin %{buildroot}%{_bindir}
 #- add link for dfu-programmer (see scripts/postinst)
 ln -nsf /opt/tuxdroid/bin/dfu-programmer %{buildroot}%{_bindir}/dfu-programmer
+#- fix perms of images
+chmod a+r %{buildroot}%{_datadir}/pixmaps/*.png
 
 rm -f %{buildroot}%{_docdir}/%{name}/COPYING 
 #- copyrighted file
