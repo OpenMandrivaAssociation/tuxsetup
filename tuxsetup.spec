@@ -1,6 +1,6 @@
 %define name tuxsetup
 %define version 1.2.0037
-%define release %mkrel 1
+%define release %mkrel 2
 %define distname %{name}-%{version}-final
 
 %define _requires_exceptions libbabtts.so
@@ -53,8 +53,8 @@ ln -nsf /opt/tuxdroid/bin/dfu-programmer %{buildroot}%{_bindir}/dfu-programmer
 chmod a+r %{buildroot}%{_datadir}/pixmaps/*.png
 
 rm -f %{buildroot}%{_docdir}/%{name}/COPYING 
-#- copyrighted file
-rm -f %{buildroot}/opt/tuxdroid/apps/tuxgi/sounds/9.wav
+#- 9.wav is a copyrighted file
+cp -a %{buildroot}/opt/tuxdroid/apps/tuxgi/sounds/{8,9}.wav
 #- move udev rules after main Mandriva rules,
 #- so that pam_console_apply does not modify device permissions while tuxd is running
 #- or else some race will prevent tuxd from accessing the device
