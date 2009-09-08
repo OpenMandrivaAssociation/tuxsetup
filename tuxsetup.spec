@@ -1,6 +1,6 @@
 %define name tuxsetup
 %define version 1.2.0037
-%define release %mkrel 2
+%define release %mkrel 3
 %define distname %{name}-%{version}-final
 
 %define _requires_exceptions libbabtts.so
