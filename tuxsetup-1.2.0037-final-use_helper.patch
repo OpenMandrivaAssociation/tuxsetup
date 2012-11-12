@@ -1,0 +1,30 @@
+diff -p -up tuxsetup-1.2.0037-final/mirror/usr/share/applications/tuxmanager.desktop.use_helper tuxsetup-1.2.0037-final/mirror/usr/share/applications/tuxmanager.desktop
+--- tuxsetup-1.2.0037-final/mirror/usr/share/applications/tuxmanager.desktop.use_helper	2007-12-18 14:37:47.000000000 +0100
++++ tuxsetup-1.2.0037-final/mirror/usr/share/applications/tuxmanager.desktop	2007-12-20 13:47:49.000000000 +0100
+@@ -3,7 +3,7 @@ Version=0.1
+ Encoding=UTF-8
+ Name=Tux Gadget Manager
+ Comment=Tux droid gadget manager written by Rémi Jocaille
+-Exec=tuxfw /opt/tuxdroid/apps/tux_manager/gadgets/Manager.tgf
++Exec=tuxgdg
+ Icon=tuxmanager.png
+ Terminal=false
+ Type=Application
+diff -p -up tuxsetup-1.2.0037-final/mirror/usr/share/applications/tuxmaker.desktop.use_helper tuxsetup-1.2.0037-final/mirror/usr/share/applications/tuxmaker.desktop
+--- tuxsetup-1.2.0037-final/mirror/usr/share/applications/tuxmaker.desktop.use_helper	2007-12-18 14:37:47.000000000 +0100
++++ tuxsetup-1.2.0037-final/mirror/usr/share/applications/tuxmaker.desktop	2007-12-20 13:50:46.000000000 +0100
+@@ -3,7 +3,7 @@ Version=0.1
+ Encoding=UTF-8
+ Name=Tux Gadget Maker
+ Comment=Tux droid gadget maker written by Rémi Jocaille
+-Exec=/opt/tuxdroid/apps/tux_framework/SDK/gadget_maker/tuxgagdetmaker.py
++Exec=tuxgdgmaker
+ Icon=gadgetmaker.png
+ Terminal=true
+ Type=Application
+diff -p -up tuxsetup-1.2.0037-final/mirror/opt/tuxdroid/bin/tuxgdgmaker.use_helper tuxsetup-1.2.0037-final/mirror/opt/tuxdroid/bin/tuxgdgmaker
+--- tuxsetup-1.2.0037-final/mirror/opt/tuxdroid/bin/tuxgdgmaker.use_helper	2007-12-20 13:52:05.000000000 +0100
++++ tuxsetup-1.2.0037-final/mirror/opt/tuxdroid/bin/tuxgdgmaker	2007-12-20 13:51:11.000000000 +0100
+@@ -0,0 +1,2 @@
++#!/bin/bash
++/opt/tuxdroid/apps/tux_framework/SDK/gadget_maker/tuxgagdetmaker.py

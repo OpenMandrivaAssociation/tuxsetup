@@ -1,0 +1,9 @@
+--- tuxsetup-1.1.0010-final/mirror/etc/udev/rules.d/45-tuxdroid.rules.suppl_group	2007-12-11 18:51:39.000000000 +0100
++++ tuxsetup-1.1.0010-final/mirror/etc/udev/rules.d/45-tuxdroid.rules	2007-12-11 18:51:51.000000000 +0100
+@@ -2,5 +2,5 @@
+ SUBSYSTEM=="usb_device", SYSFS{idVendor}=="03eb", SYSFS{idProduct}=="2ffd", MODE:="0666"
+ 
+ # Tuxdroid dongle plugged normally, we launch both daemons and give everyone access to the device
+-SUBSYSTEM=="usb_device", SYSFS{idVendor}=="03eb", SYSFS{idProduct}=="ff07", RUN+="/opt/tuxdroid/bin/tuxd -d", MODE:="0666"
++SUBSYSTEM=="usb_device", SYSFS{idVendor}=="03eb", SYSFS{idProduct}=="ff07", RUN+="/bin/su - root -c '/opt/tuxdroid/bin/tuxd -d'"
+ SUBSYSTEM=="usb_device", SYSFS{idVendor}=="03eb", SYSFS{idProduct}=="ff07", RUN+="/opt/tuxdroid/bin/tuxttsd -d"
